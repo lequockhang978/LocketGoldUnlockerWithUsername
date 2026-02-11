@@ -191,6 +191,39 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Note Card */
+        .note {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0px;
+            /* Spacing handled by gap in main-wrapper */
+        }
+
+        .note h3 {
+            color: #FFD700;
+            font-size: 1rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note ul {
+            padding-left: 1.2rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .note li {
+            margin-bottom: 0.5rem;
+        }
+
         /* Footer */
         footer {
             margin-top: auto;
@@ -228,6 +261,101 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Customize SweetAlert2 to match glassmorphism */
+        div:where(.swal2-container) div:where(.swal2-popup) {
+            background: rgba(30, 30, 30, 0.8) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border: var(--glass-border) !important;
+            border-radius: 1.5rem !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        div:where(.swal2-container) h2:where(.swal2-title) {
+            color: #fff !important;
+            font-family: 'Outfit', sans-serif !important;
+        }
+
+        div:where(.swal2-container) .swal2-html-container {
+            font-family: 'Outfit', sans-serif !important;
+            color: var(--text-secondary) !important;
+        }
+
+        /* User Info Card Styles */
+        .swal2-html-container .user-info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .swal2-html-container .user-info-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .swal2-html-container .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #FFD700;
+        }
+
+        .swal2-html-container .user-details {
+            flex: 1;
+        }
+
+        .swal2-html-container .user-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .swal2-html-container .user-username {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+
+        .swal2-html-container .user-uid {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+            word-break: break-all;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Custom Buttons for Swal */
+        .glass-confirm-btn {
+            background: var(--primary-gradient) !important;
+            color: #000 !important;
+            font-weight: 700 !important;
+            border-radius: 0.75rem !important;
+            padding: 12px 24px !important;
+            border: none !important;
+            box-shadow: none !important;
+            font-family: 'Outfit', sans-serif !important;
+        }
+
+        .glass-cancel-btn {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #fff !important;
+            border-radius: 0.75rem !important;
+            padding: 12px 24px !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            font-family: 'Outfit', sans-serif !important;
+            margin-top: 12px !important;
+            /* Spacing between buttons */
+        }
     </style>
 </head>
 
@@ -243,8 +371,8 @@
                 <input type="text" id="username" placeholder="Enter Locket username..." required autocomplete="off">
             </div>
 
-            <button id="submitBtn" onclick="restorePurchase()">
-                <span class="btn-text">Unlock Gold Now</span>
+            <button id="submitBtn" onclick="checkUserInfo()">
+                <span class="btn-text">Check User Info</span>
                 <div class="loader" id="loader"></div>
             </button>
         </div>
@@ -262,9 +390,27 @@
             <ol>
                 <li>Open the Locket app and find your username in settings.</li>
                 <li>Enter your exact username in the field above.</li>
-                <li>Click <strong>Unlock Gold Now</strong> and wait for the process to complete.</li>
+                <li>Click <strong>Check User Info</strong> to verify the account.</li>
+                <li>Review the information and click <strong>Continue</strong> to unlock Gold.</li>
                 <li>Restart your Locket app to see the changes.</li>
             </ol>
+        </div>
+
+        <div class="note">
+            <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                    </path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                Important Note
+            </h3>
+            <ul>
+                <li>The Gold subscription is only valid until you <strong>log out</strong> of the Locket app.</li>
+                <li>This project is created for <strong>educational purposes only</strong>.</li>
+            </ul>
         </div>
     </div>
 
@@ -275,7 +421,19 @@
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        async function restorePurchase() {
+        let currentUserData = null;
+
+        const swalGlassParams = {
+            background: 'transparent', // Handled by CSS
+            customClass: {
+                popup: 'glass-popup',
+                confirmButton: 'glass-confirm-btn',
+                cancelButton: 'glass-cancel-btn'
+            },
+            buttonsStyling: false
+        };
+
+        async function checkUserInfo() {
             const usernameInput = document.getElementById('username');
             const username = usernameInput.value.trim();
             const btn = document.getElementById('submitBtn');
@@ -287,10 +445,8 @@
                     icon: 'warning',
                     title: 'Missing Input',
                     text: 'Please enter a valid Locket username!',
-                    background: '#1f2937',
-                    color: '#fff',
-                    confirmButtonColor: '#FFD700',
-                    confirmButtonText: '<span style="color:#000; font-weight:bold;">OK</span>'
+                    ...swalGlassParams,
+                    confirmButtonText: 'OK'
                 });
                 return;
             }
@@ -299,6 +455,92 @@
             btn.disabled = true;
             loader.style.display = 'block';
             btnText.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/get-user-info', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username: username }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    currentUserData = data.data;
+                    showUserInfoConfirmation(data.data);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'User Not Found',
+                        text: data.msg || "Could not find user with this username",
+                        ...swalGlassParams,
+                        confirmButtonColor: undefined, // Override if needed or rely on class
+                        confirmButtonText: 'Close'
+                    });
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Connection Error',
+                    text: 'Failed to connect to the server. Please check your internet.',
+                    ...swalGlassParams,
+                    confirmButtonText: 'Close'
+                });
+            } finally {
+                // Reset state
+                btn.disabled = false;
+                loader.style.display = 'none';
+                btnText.style.display = 'inline-block';
+            }
+        }
+
+        function showUserInfoConfirmation(userData) {
+            const fullName = `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || 'No name';
+            const avatarUrl = userData.profile_picture_url || 'https://play-lh.googleusercontent.com/eRZLg00mAQGayCrFjDBklPIpW3qFHcmUs8PUQA4z7hVe-cDKMcRqecVHONAIexJGJZM';
+
+            Swal.fire({
+                title: 'User Information',
+                html: `
+                <div class="user-info-card">
+                    <div class="user-info-header">
+                        <img src="${avatarUrl}" alt="Avatar" class="user-avatar" onerror="this.src='https://play-lh.googleusercontent.com/eRZLg00mAQGayCrFjDBklPIpW3qFHcmUs8PUQA4z7hVe-cDKMcRqecVHONAIexJGJZM'">
+                        <div class="user-details">
+                            <div class="user-name">${fullName}</div>
+                            <div class="user-username">@${userData.username}</div>
+                        </div>
+                    </div>
+                    <div class="user-uid">UID: ${userData.uid}</div>
+                </div>
+                <p style="margin-top: 1rem; color: #a0a0a0; font-size: 0.9rem;">
+                    Do you want to unlock Gold for this user?
+                </p>
+            `,
+                ...swalGlassParams,
+                showCancelButton: true,
+                confirmButtonText: 'Continue',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    restorePurchase(userData.username);
+                }
+            });
+        }
+
+        async function restorePurchase(username) {
+            // Show loading
+            Swal.fire({
+                title: 'Processing...',
+                text: 'Unlocking Gold for ' + username,
+                ...swalGlassParams,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
 
             try {
                 const response = await fetch('/api/restore', {
@@ -316,19 +558,16 @@
                         icon: 'success',
                         title: 'Success!',
                         text: data.msg,
-                        background: '#1f2937',
-                        color: '#fff',
-                        confirmButtonColor: '#FFD700',
-                        confirmButtonText: '<span style="color:#000; font-weight:bold;">Cool!</span>'
+                        ...swalGlassParams,
+                        confirmButtonText: 'Cool!'
                     });
                 } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
                         text: data.msg || "An error occurred",
-                        background: '#1f2937',
-                        color: '#fff',
-                        confirmButtonColor: '#EF4444'
+                        ...swalGlassParams,
+                        confirmButtonText: 'Close'
                     });
                 }
             } catch (error) {
@@ -337,15 +576,9 @@
                     icon: 'error',
                     title: 'Connection Error',
                     text: 'Failed to connect to the server. Please check your internet.',
-                    background: '#1f2937',
-                    color: '#fff',
-                    confirmButtonColor: '#EF4444'
+                    ...swalGlassParams,
+                    confirmButtonText: 'Close'
                 });
-            } finally {
-                // Reset state
-                btn.disabled = false;
-                loader.style.display = 'none';
-                btnText.style.display = 'inline-block';
             }
         }
 
