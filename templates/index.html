@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locket Gold Unlocker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #FFD700 0%, #FDB931 100%);
+            --bg-color: #0f0f0f;
+            --card-bg: rgba(30, 30, 30, 0.6);
+            --text-color: #ffffff;
+            --text-secondary: #a0a0a0;
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            border: var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h1 {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        p.subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--input-bg);
+            border: var(--glass-border);
+            border-radius: 0.75rem;
+            color: var(--text-color);
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #FFD700;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-gradient);
+            color: #000;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(253, 185, 49, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Instructions Card */
+        .instructions {
+            background: rgba(20, 20, 20, 0.4);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: var(--glass-border);
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .instructions h3 {
+            color: #fff;
+            font-size: 1rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .instructions ol {
+            padding-left: 1.2rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        footer a {
+            color: #FFD700;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+        }
+
+        /* Loader */
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <div class="container">
+            <h1>Locket Gold</h1>
+            <p class="subtitle">Unlock premium features instantly</p>
+
+            <div class="form-group">
+                <label for="username">Target Username</label>
+                <input type="text" id="username" placeholder="Enter Locket username..." required autocomplete="off">
+            </div>
+
+            <button id="submitBtn" onclick="restorePurchase()">
+                <span class="btn-text">Unlock Gold Now</span>
+                <div class="loader" id="loader"></div>
+            </button>
+        </div>
+
+        <div class="instructions">
+            <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                How to use
+            </h3>
+            <ol>
+                <li>Open the Locket app and find your username in settings.</li>
+                <li>Enter your exact username in the field above.</li>
+                <li>Click <strong>Unlock Gold Now</strong> and wait for the process to complete.</li>
+                <li>Restart your Locket app to see the changes.</li>
+            </ol>
+        </div>
+    </div>
+
+    <footer>
+        Created with ❤️ by <a href="https://maihuybao.dev" target="_blank">Mai Huy Bao</a>
+    </footer>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        async function restorePurchase() {
+            const usernameInput = document.getElementById('username');
+            const username = usernameInput.value.trim();
+            const btn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+            const btnText = document.querySelector('.btn-text');
+
+            if (!username) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Missing Input',
+                    text: 'Please enter a valid Locket username!',
+                    background: '#1f2937',
+                    color: '#fff',
+                    confirmButtonColor: '#FFD700',
+                    confirmButtonText: '<span style="color:#000; font-weight:bold;">OK</span>'
+                });
+                return;
+            }
+
+            // Loading state
+            btn.disabled = true;
+            loader.style.display = 'block';
+            btnText.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/restore', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username: username }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: data.msg,
+                        background: '#1f2937',
+                        color: '#fff',
+                        confirmButtonColor: '#FFD700',
+                        confirmButtonText: '<span style="color:#000; font-weight:bold;">Cool!</span>'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: data.msg || "An error occurred",
+                        background: '#1f2937',
+                        color: '#fff',
+                        confirmButtonColor: '#EF4444'
+                    });
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Connection Error',
+                    text: 'Failed to connect to the server. Please check your internet.',
+                    background: '#1f2937',
+                    color: '#fff',
+                    confirmButtonColor: '#EF4444'
+                });
+            } finally {
+                // Reset state
+                btn.disabled = false;
+                loader.style.display = 'none';
+                btnText.style.display = 'inline-block';
+            }
+        }
+
+        // Allow pressing Enter to submit
+        document.getElementById("username").addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("submitBtn").click();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
