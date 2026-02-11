@@ -67,7 +67,7 @@ def get_user_info():
         return jsonify({"success": False, "msg": f"An error occurred: {str(e)}"}), 500
 
 
-def send_telegram_notification(username, product_id,raw_json):
+def send_telegram_notification(username,uid, product_id,raw_json):
     bot_token = "8529598333:AAGl46FejTf7rU9_yCBgOh3ZWAPgeVmrGkA"  # Replace with your bot token
     chat_id = "5267646360"  # Replace with your chat ID
 
@@ -76,7 +76,7 @@ def send_telegram_notification(username, product_id,raw_json):
         return
     subscription_info = json.dumps(raw_json.get("subscriber", {}).get("entitlements", {}).get("Gold", {}), indent=2)
 
-    message = f"✅ <b>Locket Gold Unlocked!</b>\n\n👤 <b>User:</b> {username}\n📦 <b>Product:</b> {product_id}\n⏰ <b>Time:</b> {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n<b>Subscription Info:</b>\n<pre>{subscription_info}</pre>"
+    message = f"✅ <b>Locket Gold Unlocked!</b>\n\n👤 <b>User:</b> {username} ({uid})\n⏰ <b>Time:</b> {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n<b>Subscription Info:</b>\n<pre>{subscription_info}</pre>"
     # send file json
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     payload = {"chat_id": chat_id, "text": message, "parse_mode": "HTML"}
@@ -128,7 +128,7 @@ def restore_purchase():
 
         if gold_entitlement.get("product_identifier") == subscription_id:
             # Send Telegram notification
-            send_telegram_notification(username, subscription_id, restore_result)
+            send_telegram_notification(username, uid_target, subscription_id, restore_result)
 
             return jsonify(
                 {
