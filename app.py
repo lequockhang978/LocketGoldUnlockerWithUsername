@@ -8,7 +8,14 @@ import requests
 app = Flask(__name__)
 
 # Initialize API and Auth
-subscription_ids = ["locket_1600_1y", "locket_199_1m", "locket_199_1m_only", "locket_3600_1y" ,"locket_399_1m_only", ""]
+subscription_ids = [
+    "locket_1600_1y",
+    "locket_199_1m",
+    "locket_199_1m_only",
+    "locket_3600_1y",
+    "locket_399_1m_only",
+    "",
+]
 auth = Auth("locket@maihuybao.dev", "Mhbao@26062007")
 try:
     token = auth.get_token()
@@ -16,6 +23,19 @@ try:
 except Exception as e:
     print(f"Error initializing API: {e}")
     api = None
+
+
+def refresh_api_token():
+    global api
+    try:
+        print("Refreshing API token...")
+        new_token = auth.create_token()
+        api = LocketAPI(new_token)
+        print("API token refreshed successfully.")
+        return True
+    except Exception as e:
+        print(f"Failed to refresh API token: {e}")
+        return False
 
 
 @app.route("/")
@@ -39,7 +59,17 @@ def get_user_info():
     try:
         # User lookup
         print(f"Looking up user: {username}")
-        account_info = api.getUserByUsername(username)
+        try:
+            account_info = api.getUserByUsername(username)
+        except Exception as e:
+            if "401" in str(e) or "Unauthenticated" in str(e):
+                print(f"Creating new token because of {e}")
+                if refresh_api_token():
+                    account_info = api.getUserByUsername(username)
+                else:
+                    raise e
+            else:
+                raise e
 
         # Check if we got a valid response structure
         if not account_info or "result" not in account_info:
@@ -67,14 +97,18 @@ def get_user_info():
         return jsonify({"success": False, "msg": f"An error occurred: {str(e)}"}), 500
 
 
-def send_telegram_notification(username,uid, product_id,raw_json):
-    bot_token = "8529598333:AAGl46FejTf7rU9_yCBgOh3ZWAPgeVmrGkA"  # Replace with your bot token
+def send_telegram_notification(username, uid, product_id, raw_json):
+    bot_token = (
+        "8529598333:AAGl46FejTf7rU9_yCBgOh3ZWAPgeVmrGkA"  # Replace with your bot token
+    )
     chat_id = "5267646360"  # Replace with your chat ID
 
     if bot_token == "YOUR_BOT_TOKEN" or chat_id == "YOUR_CHAT_ID":
         print("Telegram notification skipped: Token or Chat ID not set.")
         return
-    subscription_info = json.dumps(raw_json.get("subscriber", {}).get("entitlements", {}).get("Gold", {}), indent=2)
+    subscription_info = json.dumps(
+        raw_json.get("subscriber", {}).get("entitlements", {}).get("Gold", {}), indent=2
+    )
 
     message = f"✅ <b>Locket Gold Unlocked!</b>\n\n👤 <b>User:</b> {username} ({uid})\n⏰ <b>Time:</b> {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n<b>Subscription Info:</b>\n<pre>{subscription_info}</pre>"
     # send file json
@@ -103,7 +137,17 @@ def restore_purchase():
     try:
         # User lookup
         print(f"Looking up user: {username}")
-        account_info = api.getUserByUsername(username)
+        try:
+            account_info = api.getUserByUsername(username)
+        except Exception as e:
+            if "401" in str(e) or "Unauthenticated" in str(e):
+                print(f"Creating new token because of {e}")
+                if refresh_api_token():
+                    account_info = api.getUserByUsername(username)
+                else:
+                    raise e
+            else:
+                raise e
         # Check if we got a valid response structure
         if not account_info or "result" not in account_info:
             return jsonify(
@@ -120,7 +164,17 @@ def restore_purchase():
 
         print(f"Restoring purchase for UID: {uid_target}")
         # Restore purchase
-        restore_result = api.restorePurchase(uid_target)
+        try:
+            restore_result = api.restorePurchase(uid_target)
+        except Exception as e:
+            if "401" in str(e) or "Unauthenticated" in str(e):
+                print(f"Creating new token because of {e}")
+                if refresh_api_token():
+                    restore_result = api.restorePurchase(uid_target)
+                else:
+                    raise e
+            else:
+                raise e
 
         # Check entitlement
         entitlements = restore_result.get("subscriber", {}).get("entitlements", {})
@@ -128,12 +182,17 @@ def restore_purchase():
 
         if gold_entitlement.get("product_identifier") in subscription_ids:
             # Send Telegram notification
-            send_telegram_notification(username, uid_target, gold_entitlement.get("product_identifier"), restore_result)
+            send_telegram_notification(
+                username,
+                uid_target,
+                gold_entitlement.get("product_identifier"),
+                restore_result,
+            )
 
             return jsonify(
                 {
                     "success": True,
-                    "msg": f"Purchase {gold_entitlement.get("product_identifier")} for {username} successfully!",
+                    "msg": f"Purchase {gold_entitlement.get('product_identifier')} for {username} successfully!",
                 }
             )
         else:
