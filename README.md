@@ -1,343 +1,164 @@
-# Locket Gold Unlock With Username
+# 🚀 Locket Gold Activator Bot (Professional Edition)
 
-Unlock Locket Gold premium features **with just a username** — no password required! Built with Flask, featuring an intelligent queue management system and beautiful glassmorphism UI.
+<div align="center">
 
-![Locket Gold](https://img.shields.io/badge/Locket-Gold-FFD700?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-2.0+-000000?style=for-the-badge&logo=flask&logoColor=white)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Telegram](https://img.shields.io/badge/Telegram-Bot-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://core.telegram.org/bots)
+[![AsyncIO](https://img.shields.io/badge/Async-Powered-green?style=for-the-badge&logo=icloud&logoColor=white)](https://docs.python.org/3/library/asyncio.html)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)]()
 
-## Features
+**The most advanced, high-performance Telegram Bot for automating Locket Gold activation.**  
+*Built with speed, security, and scalability in mind.*
 
-### Core Features
+[Why Choose This Bot?](#-why-choose-locket-gold-activator-bot) • [Features](#-key-features) • [Installation](#-installation) • [Configuration](#-configuration)
 
-- **🔑 Username-Only Unlock**: No password needed — just enter the Locket username to unlock Gold
-- **👤 User Verification**: Preview user profile and information before processing
-- **📱 Real-time Notifications**: Telegram integration for instant success alerts
-- **🎓 Educational Purpose**: Learn about API interactions and modern web development
-
-### Queue Management System
-
-- **Smart Queue Processing**: Handles multiple concurrent requests sequentially
-- **Real-time Position Updates**: See your exact position in queue
-- **Wait Time Estimation**: Dynamic countdown based on actual processing times
-- **Progress Visualization**: Animated progress bar showing queue advancement
-- **Total Queue Display**: Know exactly how many people are waiting
-
-### User Interface
-
-- **Modern Glassmorphism Design**: Beautiful frosted glass effects with gradient accents
-- **Responsive Layout**: Works perfectly on all screen sizes
-- **Smooth Animations**: Polished micro-interactions and transitions
-- **Real-time Countdown**: Live timer that ticks down every second
-- **Status Indicators**: Clear visual feedback for all states (waiting, processing, completed)
-
-## Screenshots
-
-### Main Interface
-
-Beautiful glassmorphism design with gradient backgrounds and smooth animations.
-
-### Queue Status Modal
-
-Real-time queue position updates with countdown timer and progress bar.
-
-## Installation
-
-### Prerequisites
-
-- Python 3.8 or higher
-- pip (Python package manager)
-
-### Setup
-
-1. **Clone the repository**
-
-   ```bash
-   git clone <repository-url>
-   cd LocketGoldUsername
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Configure environment variables**
-
-   Create a `.env` file in the project root:
-
-   ```env
-   EMAIL=your_locket_email@example.com
-   PASSWORD=your_locket_password
-   ```
-
-4. **Run the application**
-
-   ```bash
-   python app.py
-   ```
-
-5. **Access the web interface**
-
-   Open your browser and navigate to:
-
-   ```
-   http://localhost:5000
-   ```
-
-## Usage
-
-### Basic Usage
-
-1. **Enter Username**: Type the Locket username you want to unlock Gold for
-2. **Verify User**: Click "Check User Info" to preview the account details
-3. **Confirm**: Review the information and click "Continue"
-4. **Wait in Queue**: Watch the real-time queue status with countdown timer
-5. **Success**: Receive confirmation when Gold is unlocked
-
-### Queue System
-
-When multiple users submit requests simultaneously:
-
-- Each request receives a unique position in the queue
-- Requests are processed one at a time (sequential processing)
-- Real-time updates show your position, total waiting, and estimated time
-- Countdown timer ticks down every second for better UX
-- Progress bar visually represents queue advancement
-
-### Configuration Profile (iOS)
-
-After unlocking Gold, install the configuration profile to prevent revocation:
-
-1. Click "Download Configuration Profile" button
-2. Install the profile on your iOS device
-3. Restart the Locket app
-
-## Project Structure
-
-```
-LocketGoldUsername/
-├── app.py                  # Main Flask application with queue manager
-├── auth.py                 # Locket authentication handler
-├── api.py                  # Locket API wrapper
-├── requirements.txt        # Python dependencies
-├── .env                    # Environment configuration (not in repo)
-├── templates/
-│   └── index.html         # Frontend with queue UI
-└── static/
-    └── locket.mobileconfig # iOS configuration profile
-```
-
-## How It Works: Restore Purchase Mechanism
-
-This tool unlocks Locket Gold by exploiting the **App Store sandbox restore purchase API**. Here's the technical breakdown:
-
-### The Restore Purchase Flow
-
-1. **User Lookup**
-   - Enter target username (e.g., `@john_doe`)
-   - Tool queries Locket API to fetch user's unique ID (UID)
-   - Displays user profile for verification
-
-2. **Restore Purchase Request**
-   - Sends a restore purchase request to Locket's backend API
-   - Request mimics the official Locket app's restore purchase call
-   - Uses App Store sandbox credentials (no actual payment)
-
-3. **Sandbox Entitlement Grant**
-   - Locket's server validates the restore request against App Store's sandbox environment
-   - Sandbox environment treats the request as a valid purchase restoration
-   - Server grants `Gold` entitlement to the target user's account
-
-4. **Instant Activation**
-   - Gold subscription becomes active immediately
-   - User sees premium features unlocked in their Locket app
-   - No actual App Store purchase or payment involved
-
-### Technical Mechanism
-
-**Why Username Only?**
-
-- Locket's API allows restore purchase requests with just the user's UID
-- No password authentication required for restore operations
-- The tool acts as a middleman between you and Locket's API
-
-**App Store Sandbox**
-
-- App Store has two environments: **Production** and **Sandbox**
-- Sandbox is for testing in-app purchases without real money
-- Locket's restore purchase endpoint accepts sandbox credentials
-- This allows "restoring" purchases that were never actually made
-
-**API Call Flow**
-
-```
-User Input (username)
-  → Locket API: getUserByUsername()
-    → Returns user UID
-      → Locket API: restorePurchase(UID)
-        → App Store Sandbox Validation
-          → Grant Gold Entitlement
-            → Success!
-```
-
-### Why It Works
-
-1. **Sandbox vs Production**: Locket's API doesn't strictly validate whether the restore request is from sandbox or production environment
-2. **No Receipt Validation**: The restore endpoint doesn't verify actual purchase receipts
-3. **UID-based Grants**: Entitlements are tied to UID, which is publicly accessible via username lookup
-
-### Limitations
-
-⚠️ **Temporary Unlock**:
-
-- Gold is active only until you **log out** of Locket
-- Logging out clears the local entitlement cache
-- Must re-unlock after each logout
-
-⚠️ **Revocation Protection**:
-
-- Install the configuration profile (`.mobileconfig`) to block Locket's revocation servers
-- Without the profile, Locket may revoke Gold after detecting the sandbox grant
-- Profile blocks network requests to revocation endpoints
-
-## Technical Details
-
-### Backend Architecture
-
-**Queue Manager**:
-
-- Thread-safe queue using Python's `queue.Queue` and `threading.Lock`
-- Background worker thread for sequential request processing
-- Client tracking with UUID-based identifiers
-- Processing time history for accurate wait time estimation
-
-**API Endpoints**:
-
-- `POST /api/get-user-info`: Fetch user details by username
-- `POST /api/restore`: Add request to queue and return client_id
-- `POST /api/queue/status`: Poll for current queue position and status
-
-### Frontend Features
-
-**Real-time Updates**:
-
-- Polls server every 1 second for queue status
-- Independent countdown timer for smooth UX
-- Automatic cleanup on completion or error
-
-**Visual Feedback**:
-
-- Position indicator (e.g., "#3" or "Processing")
-- Total waiting count
-- Estimated time with countdown (e.g., "12s" or "1m 30s")
-- Animated progress bar (0-100%)
-
-### Security Notes
-
-- Credentials stored in `.env` file (excluded from version control)
-- API tokens refreshed automatically on expiration
-- All API communications use HTTPS
-- No sensitive data logged or stored
-
-## Queue System Details
-
-### How It Works
-
-1. **Request Submission**: User clicks "Continue" → joins queue
-2. **Queue Assignment**: Receives unique `client_id` and initial position
-3. **Background Processing**: Worker thread processes requests sequentially
-4. **Status Updates**: Client polls every 1s for position/time updates
-5. **Countdown**: Timer ticks down independently for smooth visualization
-6. **Completion**: Shows success/error message when processing finishes
-
-### Wait Time Calculation
-
-- Tracks actual processing time for each request
-- Uses moving average of last 10 completions
-- Formula: `position × average_processing_time`
-- Defaults to 5 seconds per request if no history
-
-### Performance
-
-- **Throughput**: ~1 request per 5 seconds (API-limited)
-- **Concurrency**: Sequential processing (prevents API rate limits)
-- **Scalability**: Handles unlimited queue size (memory-limited)
-- **Reliability**: Auto-retry on connection errors
-
-## Configuration
-
-### Environment Variables
-
-| Variable   | Description             | Required |
-| ---------- | ----------------------- | -------- |
-| `EMAIL`    | Locket account email    | Yes      |
-| `PASSWORD` | Locket account password | Yes      |
-
-### Telegram Notifications
-
-To enable Telegram notifications, update these values in `app.py`:
-
-```python
-bot_token = "YOUR_TELEGRAM_BOT_TOKEN"
-chat_id = "YOUR_TELEGRAM_CHAT_ID"
-```
-
-## Troubleshooting
-
-### Port Already in Use
-
-```bash
-# Kill process on port 5000
-lsof -ti:5000 | xargs kill -9
-
-# Or change port in app.py
-app.run(debug=True, port=8000)  # Use different port
-```
-
-### Authentication Failed
-
-- Verify `.env` file exists with correct credentials
-- Check if Locket account credentials are valid
-- Ensure email and password have no extra spaces
-
-### Queue Not Processing
-
-- Check terminal logs for errors
-- Verify API credentials are correct
-- Ensure internet connection is stable
-
-## Disclaimer
-
-⚠️ **Educational Purpose Only**
-
-This project is created for **educational purposes only** to demonstrate:
-
-- Web application development with Flask
-- Queue management systems
-- Real-time status updates
-- Modern UI/UX design patterns
-- API integration techniques
-
-**Important Notes**:
-
-- This tool is for **iOS devices only**
-- Gold subscription is valid **only until you log out** of the Locket app
-- Use responsibly and in compliance with Locket's Terms of Service
-- The developers are not responsible for any misuse of this tool
-
-## Credits
-
-- **Developer**: [Mai Huy Bao](https://maihuybao.dev)
-- **Design**: Modern glassmorphism with gradient accents
-- **Font**: [Outfit](https://fonts.google.com/specimen/Outfit) by Google Fonts
-- **Icons**: SVG icons from various sources
-
-## License
-
-This project is provided as-is for educational purposes. Use at your own discretion.
+</div>
 
 ---
 
-Made with ❤️ by [Mai Huy Bao](https://maihuybao.dev)
+## 💎 Why Choose Locket Gold Activator Bot?
+
+Unlike other basic scripts or tools, this bot is engineered as a **production-grade system**. It solves the common problems of slowness, API bans, and revocations.
+
+| Feature | This Bot 🚀 | Standard Scripts ❌ |
+| :--- | :--- | :--- |
+| **Performance** | **Zero-Lag Async Core**. Handles thousands of users without freezing. | Single-threaded. Freezes while processing one user. |
+| **Reliability** | **Round-Robin Token Rotation**. Distributes load to prevent bans. | Uses 1 token until it dies or gets rate-limited. |
+| **Safety** | **Smart Anti-Revoke**. Auto-generates NextDNS profiles to block validation servers. | No protection. Gold disappears after a few hours/days. |
+| **User Experience** | **Real-time Queue Updates**. Users know their exact position (`#1`, `#2`...). | Silent failure. Users don't know if it's working. |
+| **Architecture** | **Worker Pool**. Scalable system (add 1 or 100 workers easily). | Simple loop. Cannot scale with demand. |
+
+---
+
+## 🌟 Key Features
+
+### ⚡ **High-Performance Core**
+*   **Fully Asynchronous**: Powered by `aiohttp` and `asyncio` for non-blocking I/O. The bot remains responsive to commands even under heavy load.
+*   **Worker Pool System**: Configurable number of concurrent workers (`NUM_WORKERS`) to parallelize request processing.
+
+### 🛡️ **Advanced Security**
+*   **NextDNS Integration**: Automatically creates a unique DNS profile for each user that blocks `revenuecat.com`, ensuring the Gold subscription sticks.
+*   **Strict Cooldowns**: Enforces a 45-second cooldown per token usage to mimic human behavior and avoid detection.
+
+### 🤖 **Smart Automation**
+*   **Auto-Resolution**: Just paste a Locket username or link; the bot handles UID resolution automatically.
+*   **Queue Management**: FIFO (First-In-First-Out) queue system with live status updates to prevent API flooding.
+*   **Admin Dashboard**: Powerful `/stats` command to monitor queue size, active workers, and success rates in real-time.
+
+---
+
+## 🛠️ Installation
+
+### Prerequisites
+*   Python 3.9+
+*   Telegram Bot Token via [@BotFather](https://t.me/BotFather)
+*   NextDNS API Key via [NextDNS Developer](https://my.nextdns.io/account)
+
+### Automated Setup
+We provide a **one-click setup script** that handles virtual environments and dependencies.
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/thanhdo1110/Locket-Gold.git
+cd Locket-Gold
+
+# 2. Run the setup script
+chmod +x run.sh
+./run.sh
+```
+
+---
+
+## ⚙️ Configuration
+
+The system is configured via `app/config.py`. You must provide your API keys and Receipt Tokens here.
+
+```python
+# app/config.py
+
+# 1. System Credantials
+BOT_TOKEN   = "YOUR_TELEGRAM_BOT_TOKEN_HERE"
+NEXTDNS_KEY = "YOUR_NEXTDNS_API_KEY_HERE"
+ADMIN_ID    = 123456789  # Replace with your Telegram User ID
+
+# 2. Worker Settings
+# Match this number to the number of Token Sets you have to ensure 1-to-1 mapping.
+NUM_WORKERS = 2 
+
+# 3. Receipt Tokens (Dumped from Jailbroken/Rooted Devices)
+TOKEN_SETS = [
+    {
+        "fetch_token": "ey...",      # RevenueCat Fetch Token
+        "app_transaction": "ey...",  # Apple Receipt Transaction
+        "is_sandbox": False          # Must be False for Production
+    },
+    # Add more token sets as needed...
+]
+```
+
+---
+
+## 🎮 Commands
+
+### User Commands
+Use these commands in your Telegram bot:
+
+| Command | Usage | Description |
+| :--- | :--- | :--- |
+| `/start` | - | Initialize the bot and show the main menu. |
+| `/setlang` | - | Switch between English 🇺🇸 and Vietnamese 🇻🇳. |
+| `/help` | - | View detailed help and instructions. |
+| **Direct Message** | `username` | Send any Locket username or link to queue an upgrade. |
+
+### Admin Commands (👑)
+Restricted to the `ADMIN_ID` configured in `config.py`.
+
+| Command | Usage | Description |
+| :--- | :--- | :--- |
+| `/stats` | - | View **Queue Size**, Active Workers, and System Health. |
+| `/noti` | `/noti <msg>` | Broadcast a message to **all** bot users. |
+| `/rs` | `/rs <id>` | Reset the daily limit for a specific user ID. |
+| `/setdonate` | Reply to photo | Set the custom "Success" image shown after activation. |
+
+---
+
+## 📊 System Architecture
+
+```mermaid
+graph TD
+    User([👤 User]) -->|Sends Username| Bot
+    
+    subgraph "🤖 Bot Core (AsyncIO)"
+        Bot[Telegram Handler] -->|Enqueue| Queue[FIFO Queue]
+        Queue -->|1. Pop Request| Worker[👱 Worker Thread]
+    end
+    
+    subgraph "☁️ External APIs"
+        Worker -->|2. Inject Token| RC[RevenueCat API]
+        Worker -->|3. Create Profile| NextDNS[NextDNS API]
+    end
+    
+    RC -- 200 OK --> Worker
+    NextDNS -- Profile Link --> Worker
+    
+    Worker -->|4. Success Message| Bot
+    Bot -->|5. Notify User| User
+```
+
+---
+
+## ⚠️ Disclaimer
+
+> **This project is for EDUCATIONAL and RESEARCH purposes only.**  
+> The author is not responsible for any misuse of this software. By using this tool, you agree to take full responsibility for your actions. "Locket Widget" and "RevenueCat" are trademarks of their respective owners.
+
+---
+
+<div align="center">
+
+**[ Report Bug ](https://github.com/thanhdo1110/Locket-Gold/issues) • [ Request Feature ](https://github.com/thanhdo1110/Locket-Gold/issues)**
+
+Made with ❤️ by [Thanh Do](https://github.com/thanhdo1110)
+
+</div>
